@@ -1,5 +1,7 @@
 package com.example.firstapp;
 
+import java.util.List;
+
 public class People {
 
     private String name;
@@ -10,10 +12,10 @@ public class People {
     private String birth_year;
     private String gender;
     private String homeworld;
-    private String films;
-    private String species;
-    private String vehicles;
-    private String starships;
+    private List<String> films;
+    private List<String> species;
+    private List<String> vehicles;
+    private List<String> starships;
     private String created;
     private String edited;
     private String url;
@@ -50,19 +52,19 @@ public class People {
         return homeworld;
     }
 
-    public String getFilms() {
+    public List<String> getFilms(){
         return films;
     }
 
-    public String getSpecies() {
-        return species;
+    public List<String> getSpecies(){
+       return species;
     }
 
-    public String getVehicles() {
+    public List<String> getVehicles(){
         return vehicles;
     }
 
-    public String getStarships() {
+    public List<String> getStraships(){
         return starships;
     }
 

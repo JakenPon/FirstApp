@@ -6,5 +6,5 @@ import retrofit2.http.GET;
 public interface StarWarsApi {
 
     @GET("/api/people/")
-    Call<RestStarWarsResponse> getPokemonResponse();
+    Call<RestStarWarsResponse> getStarWarsResponse();
 }
