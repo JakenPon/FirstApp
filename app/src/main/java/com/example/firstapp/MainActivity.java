@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://swapi.co/api/";
+    private static final String BASE_URL = "https://rickandmortyapi.com/";
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -31,23 +31,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showList();
+
         makeApiCall();
     }
 
-    private void showList() {
+    private void showList(List<Character> CharacterList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }// define an adapter
-        mAdapter = new ListAdapter(input);
+        mAdapter = new ListAdapter(CharacterList);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -62,22 +57,23 @@ public class MainActivity extends AppCompatActivity {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 
-            StarWarsApi starWarsApi = retrofit.create(StarWarsApi.class);
+            RickAndMortyApi rickAndMortyApi = retrofit.create(RickAndMortyApi.class);
 
-            Call<RestStarWarsResponse> call = starWarsApi.getStarWarsResponse();
-            call.enqueue(new Callback<RestStarWarsResponse>() {
+            Call<RestRickAndMortyResponse> call = rickAndMortyApi.getRickAndMortyResponse();
+            call.enqueue(new Callback<RestRickAndMortyResponse>() {
                 @Override
-                public void onResponse(Call<RestStarWarsResponse> call, Response<RestStarWarsResponse> response) {
+                public void onResponse(Call<RestRickAndMortyResponse> call, Response<RestRickAndMortyResponse> response) {
                     if(response.isSuccessful() &&  response.body() != null){
-                        List<People> peopleList = response.body().getResults();
+                        List<Character> characterList = response.body().getResults();
                         Toast.makeText(getApplicationContext(), "API OK", Toast.LENGTH_SHORT).show();
+                        showList(characterList);
                     }else {
                         showError();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<RestStarWarsResponse> call, Throwable t) {
+                public void onFailure(Call<RestRickAndMortyResponse> call, Throwable t) {
                     showError();
                 }
             });
