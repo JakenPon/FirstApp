@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
 
 
     @Override
@@ -33,13 +39,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        makeApiCall();
+        sharedPreferences = getSharedPreferences("app", Context.MODE_PRIVATE);
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        List<Character> characterList = getDataFromCache();
+
+        if(characterList != null){
+            showList(characterList);
+        } else{
+            makeApiCall();
+        }
+    }
+
+    private List<Character> getDataFromCache() {
+        String jsonCharacter = sharedPreferences.getString(Constants.KEY_CHARACTER, null);
+
+        if(jsonCharacter == null){
+            return null;
+        }else {
+            Type listType = new TypeToken<List<Character>>() {
+            }.getType();
+            return gson.fromJson(jsonCharacter, listType);
+        }
     }
 
     private void showList(List<Character> CharacterList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -49,10 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void makeApiCall(){
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
@@ -66,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Call<RestRickAndMortyResponse> call, Response<RestRickAndMortyResponse> response) {
                     if(response.isSuccessful() &&  response.body() != null){
                         List<Character> characterList = response.body().getResults();
-                        Toast.makeText(getApplicationContext(), "API OK", Toast.LENGTH_SHORT).show();
+                        saveList(characterList);
                         showList(characterList);
                     }else {
                         showError();
@@ -78,8 +102,16 @@ public class MainActivity extends AppCompatActivity {
                     showError();
                 }
             });
-
         }
+
+    private void saveList(List<Character> characterList) {
+        String jsonString = gson.toJson(characterList);
+        sharedPreferences
+                .edit()
+                .putString(Constants.KEY_CHARACTER, jsonString)
+                .apply();
+        Toast.makeText(getApplicationContext(), "SAVE LIST", Toast.LENGTH_SHORT).show();
+    }
 
     private void showError() {
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
