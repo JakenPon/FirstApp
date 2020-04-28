@@ -9,23 +9,55 @@
 
     <ImageView
         android:id="@+id/Image_character"
-        android:layout_width="473dp"
-        android:layout_height="270dp"
+        android:layout_width="408dp"
+        android:layout_height="214dp"
+        android:layout_marginTop="4dp"
         android:layout_weight="70"
         android:src="@mipmap/ic_launcher"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-31dp"
-        tools:layout_editor_absoluteY="-1dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/detail_name"
-        android:layout_width="204dp"
-        android:layout_height="145dp"
+        android:id="@+id/Name"
+        android:layout_width="317dp"
+        android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:text="Coucou"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Image_character" />
+        app:layout_constraintTop_toTopOf="@+id/Image_character"
+        app:layout_constraintVertical_bias="0.294" />
+
+    <TextView
+        android:id="@+id/Status"
+        android:layout_width="293dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:layout_marginBottom="416dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Name"
+        app:layout_constraintTop_toBottomOf="@+id/Name" />
+
+    <TextView
+        android:id="@+id/Species"
+        android:layout_width="292dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:layout_marginBottom="384dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Status"
+        app:layout_constraintTop_toBottomOf="@+id/Status" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
