@@ -24,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements ListAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String BASE_URL = "https://rickandmortyapi.com/";
     private RecyclerView recyclerView;
@@ -47,11 +47,12 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.OnIte
 
         List<Character> characterList = getDataFromCache();
 
-        if(characterList != null){
+     /*   if(characterList != null){
             showList(characterList);
-        } else{
+        } else{ */
+
             makeApiCall();
-        }
+       // }
 
         
     }
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.OnIte
 
         mAdapter = new ListAdapter(CharacterList);
         recyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(MainActivity.this);
+       // mAdapter.setOnItemClickListener(MainActivity.this);
 
     }
 
@@ -93,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.OnIte
             call.enqueue(new Callback<RestRickAndMortyResponse>() {
                 @Override
                 public void onResponse(Call<RestRickAndMortyResponse> call, Response<RestRickAndMortyResponse> response) {
-
                     if(response.isSuccessful() &&  response.body() != null){
                         System.out.println(response.body());
                         List<Character> characterList = response.body().getResults();
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.OnIte
 
                     }else {
                         showError();
+                        System.out.println(response.code());
                     }
                 }
 
@@ -125,10 +126,13 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.OnIte
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+  /*  @Override
     public void onItemClick(int position) {
         Intent detailIntent =  new Intent(this, CharacterDetail.class);
        // Character clickedItem = mAdapter.get(position);
         Toast.makeText(getApplicationContext(), "click ok", Toast.LENGTH_SHORT).show();
     }
+
+    */
+
 }
