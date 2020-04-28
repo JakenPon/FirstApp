@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListAdapter.OnItemClickListener {
 
     private static final String BASE_URL = "https://rickandmortyapi.com/";
     private RecyclerView recyclerView;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         } else{
             makeApiCall();
         }
+
+        
     }
 
     private List<Character> getDataFromCache() {
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new ListAdapter(CharacterList);
         recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(MainActivity.this);
+
     }
 
 
@@ -88,10 +93,13 @@ public class MainActivity extends AppCompatActivity {
             call.enqueue(new Callback<RestRickAndMortyResponse>() {
                 @Override
                 public void onResponse(Call<RestRickAndMortyResponse> call, Response<RestRickAndMortyResponse> response) {
+
                     if(response.isSuccessful() &&  response.body() != null){
+                        System.out.println(response.body());
                         List<Character> characterList = response.body().getResults();
                         saveList(characterList);
                         showList(characterList);
+
                     }else {
                         showError();
                     }
@@ -115,5 +123,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void showError() {
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent detailIntent =  new Intent(this, CharacterDetail.class);
+       // Character clickedItem = mAdapter.get(position);
+        Toast.makeText(getApplicationContext(), "click ok", Toast.LENGTH_SHORT).show();
     }
 }
