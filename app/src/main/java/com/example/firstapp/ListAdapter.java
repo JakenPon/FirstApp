@@ -1,6 +1,7 @@
 package com.example.firstapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,21 +15,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<Character> values;
-    private OnItemClickListener vListener;
+    // private OnItemClickListener vListener;
 
-    public interface  OnItemClickListener {
+    /* public interface  OnItemClickListener {
         void onItemClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
         vListener = listener;
     }
+
+     */
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -48,7 +52,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+      /*      itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(vListener != null){
@@ -58,7 +62,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                         }
                     }
                 }
-            });
+            }); */
         }
     }
 
@@ -93,7 +97,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Character currentCharacter = values.get(position);
         // holder.imageHeader.setImageIcon(currentCharacter.getImage());
         holder.txtHeader.setText(currentCharacter.getName());
@@ -102,6 +106,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 .load(currentCharacter.getImage())
                 .into(holder.imageHeader);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("position : " + position + " | name : " + currentCharacter.getName());
+                Intent intent = new Intent(holder.itemView.getContext(), CharacterDetail.class);
+                intent.putExtra("EXTRA_CHARACTER", (Serializable) currentCharacter);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         /*holder.txtHeader.setOnClickListener(new View.OnClickListener() {
             @Override

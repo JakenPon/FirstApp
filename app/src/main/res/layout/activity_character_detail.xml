@@ -18,6 +18,7 @@
         tools:layout_editor_absoluteY="-1dp" />
 
     <TextView
+        android:id="@+id/detail_name"
         android:layout_width="204dp"
         android:layout_height="145dp"
         android:layout_marginTop="24dp"

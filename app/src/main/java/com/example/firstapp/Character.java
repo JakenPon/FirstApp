@@ -1,9 +1,10 @@
 package com.example.firstapp;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.List;
 
-public class Character {
+public class Character implements Serializable {
 
     private Integer id;
     private String name;

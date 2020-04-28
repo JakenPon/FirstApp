@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     if(response.isSuccessful() &&  response.body() != null){
                         System.out.println(response.body());
                         List<Character> characterList = response.body().getResults();
-                        saveList(characterList);
+                        //saveList(characterList);
                         showList(characterList);
 
                     }else {
