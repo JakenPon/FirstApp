@@ -1,4 +1,6 @@
-package com.example.firstapp;
+package com.example.firstapp.presentation.model;
+
+import com.example.firstapp.presentation.model.Character;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
-package com.example.firstapp;
+package com.example.firstapp.presentation.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -10,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.firstapp.CharacterDetail;
+import com.example.firstapp.R;
+import com.example.firstapp.presentation.model.Character;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -22,17 +23,7 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<Character> values;
-    // private OnItemClickListener vListener;
-
-    /* public interface  OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        vListener = listener;
-    }
-
-     */
+    private List<Character> fullList;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -84,8 +75,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.row_layout, parent, false);
@@ -101,7 +91,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         final Character currentCharacter = values.get(position);
         // holder.imageHeader.setImageIcon(currentCharacter.getImage());
         holder.txtHeader.setText(currentCharacter.getName());
-        holder.txtFooter.setText(currentCharacter.getStatus());
+        holder.txtFooter.setText(currentCharacter.getSpecies());
         Picasso.get()
                 .load(currentCharacter.getImage())
                 .into(holder.imageHeader);

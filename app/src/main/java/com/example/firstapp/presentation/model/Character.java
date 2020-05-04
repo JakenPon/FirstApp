@@ -1,10 +1,20 @@
-package com.example.firstapp;
+package com.example.firstapp.presentation.model;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.List;
 
+
+
 public class Character implements Serializable {
+
+    public class Character_origin implements Serializable{
+        private String name_planet;
+        private String url_planet;
+
+        public String getName_planet() {
+            return name_planet;
+        }
+    }
 
     private Integer id;
     private String name;
@@ -12,12 +22,13 @@ public class Character implements Serializable {
     private String species;
     private String type;
     private String gender;
-    private Object origin;
+    private Character_origin origin;
     private Object location;
     private String image;
     private List<String> episode;
     private String url;
     private String created;
+
 
 
 
@@ -45,13 +56,11 @@ public class Character implements Serializable {
         return gender;
     }
 
-    public Object getOrigin() {
+    public Character_origin getOrigin() {
         return origin;
     }
 
-    public Object getLocation() {
-        return location;
-    }
+    public Object getLocation() { return location; }
 
     public String getImage() {
         return image;
@@ -65,8 +74,8 @@ public class Character implements Serializable {
         return url;
     }
 
-    public String getCreated() {
+   /* public String getCreated() {
         return created;
-    }
+    } */
 
 }

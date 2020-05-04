@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.webkit.WebStorage;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.firstapp.presentation.model.Character;
 import com.squareup.picasso.Picasso;
 
 public class CharacterDetail extends AppCompatActivity {
@@ -38,10 +38,7 @@ public class CharacterDetail extends AppCompatActivity {
         species.setText("Species : "+character.getSpecies());
         gender =  findViewById(R.id.Gender);
         gender.setText("Gender : "+character.getGender());
-        origin = findViewById(R.id.Origin);
-        origin.setText("Origin : "+character.getOrigin());
-        last_loc = findViewById(R.id.Last_Location);
-        last_loc.setText("Last Location : "+character.getLocation());
+
 
     }
 }
