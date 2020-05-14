@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C2D4DC"
-    tools:context=".CharacterDetail">
+    tools:context=".presentation.view.CharacterDetail">
 
 
     <ImageView

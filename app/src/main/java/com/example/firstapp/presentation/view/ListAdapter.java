@@ -1,30 +1,59 @@
 package com.example.firstapp.presentation.view;
 
-import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.firstapp.CharacterDetail;
 import com.example.firstapp.R;
 import com.example.firstapp.presentation.model.Character;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    private List<Character> values;
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable {
+    private List<Character> list;
+    private List<Character> listAll;
     private OnItemClickListener listener;
 
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Character> filteredList = new ArrayList<>();
+
+                for(Character character: listAll){
+                    if(character.getName().toLowerCase().contains(constraint.toString().toLowerCase())){
+                        listAll.add(character);
+                    }
+                }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+   /*     @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((Collection<? extends Character>) results.values);
+            notifyDataSetChanged();
+        }
+
+    */
+    };
 
     public interface OnItemClickListener {
         void onItemClick(Character item);
@@ -53,19 +82,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
 
     public void add(int position, Character item) {
-        values.add(position, item);
+        list.add(position, item);
         notifyItemInserted(position);
     }
 
     public void remove(int position) {
-        values.remove(position);
+        list.remove(position);
         notifyItemRemoved(position);
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ListAdapter(List<Character> myDataset, OnItemClickListener listener) {
-        this.values = myDataset;
+        this.list = myDataset;
         this.listener = listener;
+        this.listAll = new ArrayList<>(list);
     }
 
     public void setListener(OnItemClickListener listener){
@@ -86,8 +116,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Character currentCharacter = values.get(position);
-        // holder.imageHeader.setImageIcon(currentCharacter.getImage());
+        final Character currentCharacter = list.get(position);
         holder.txtHeader.setText(currentCharacter.getName());
         holder.txtFooter.setText(currentCharacter.getSpecies());
         Picasso.get()
@@ -98,29 +127,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 listener.onItemClick(currentCharacter);
-               /* System.out.println("position : " + position + " | name : " + currentCharacter.getName());
-                Intent intent = new Intent(holder.itemView.getContext(), CharacterDetail.class);
-                intent.putExtra("EXTRA_CHARACTER", (Serializable) currentCharacter);
-                v.getContext().startActivity(intent);  */
+
             }
         });
 
-        /*holder.txtHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(position);
-            }
-        });
-        */
     }
-
-
-
 
     @Override
     public int getItemCount() {
-        System.out.println(values.size());
-        return values.size();
+        System.out.println(list.size());
+        return list.size();
     }
 
 }

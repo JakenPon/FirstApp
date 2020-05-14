@@ -1,12 +1,15 @@
-package com.example.firstapp;
+package com.example.firstapp.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.firstapp.R;
+import com.example.firstapp.Singletons;
 import com.example.firstapp.presentation.model.Character;
 import com.squareup.picasso.Picasso;
 
@@ -25,7 +28,13 @@ public class CharacterDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_detail);
 
-        Character character = (Character) getIntent().getSerializableExtra("EXTRA_CHARACTER");
+        Intent intent = getIntent();
+        String characterJson = intent.getStringExtra("character");
+        Character character = Singletons.getGson().fromJson(characterJson, Character.class);
+        showDetail(character);
+    }
+
+    private void showDetail(Character character) {
         tv = findViewById(R.id.Name);
         tv.setText( character.getName());
         iv = findViewById(R.id.Image_character);
@@ -38,7 +47,6 @@ public class CharacterDetail extends AppCompatActivity {
         species.setText("Species : "+character.getSpecies());
         gender =  findViewById(R.id.Gender);
         gender.setText("Gender : "+character.getGender());
-
-
     }
+
 }
