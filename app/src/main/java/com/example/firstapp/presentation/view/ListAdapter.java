@@ -23,7 +23,12 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<Character> values;
-    private List<Character> fullList;
+    private OnItemClickListener listener;
+
+
+    public interface OnItemClickListener {
+        void onItemClick(Character item);
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -43,17 +48,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
 
-      /*      itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(vListener != null){
-                        int position = getAdapterPosition();
-                        if(position !=  RecyclerView.NO_POSITION){
-                            vListener.onItemClick(position);
-                        }
-                    }
-                }
-            }); */
         }
     }
 
@@ -69,10 +63,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<Character> myDataset) {
-        values = myDataset;
+    public ListAdapter(List<Character> myDataset, OnItemClickListener listener) {
+        this.values = myDataset;
+        this.listener = listener;
     }
 
+    public void setListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
     // Create new views (invoked by the layout manager)
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -99,10 +97,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("position : " + position + " | name : " + currentCharacter.getName());
+                listener.onItemClick(currentCharacter);
+               /* System.out.println("position : " + position + " | name : " + currentCharacter.getName());
                 Intent intent = new Intent(holder.itemView.getContext(), CharacterDetail.class);
                 intent.putExtra("EXTRA_CHARACTER", (Serializable) currentCharacter);
-                v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);  */
             }
         });
 

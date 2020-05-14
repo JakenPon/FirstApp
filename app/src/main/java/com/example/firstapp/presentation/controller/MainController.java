@@ -89,6 +89,10 @@ public class MainController {
                 .apply();
     }
 
+    public void onItemClick(Character character){
+        view.navigateDetails(character);
+    }
+
 
 
 }

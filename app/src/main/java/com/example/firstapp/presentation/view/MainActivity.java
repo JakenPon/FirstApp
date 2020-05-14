@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -14,7 +13,6 @@ import com.example.firstapp.Singletons;
 import com.example.firstapp.presentation.controller.MainController;
 import com.example.firstapp.presentation.model.Character;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -43,23 +41,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void showList(List<Character> CharacterList) {
+    public void showList(List<Character> characterList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ListAdapter(CharacterList);
+        mAdapter = new ListAdapter(characterList, new ListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Character item) {
+                controller.onItemClick(item);
+            }
+        });
         recyclerView.setAdapter(mAdapter);
-
-
     }
-
-
 
     public void showError() {
         Toast.makeText(getApplicationContext(), "API ERROR", Toast.LENGTH_SHORT).show();
     }
 
 
+    public void navigateDetails(Character character) {
+        Toast.makeText(getApplicationContext(),"activité",Toast.LENGTH_SHORT).show();
+    }
 }
