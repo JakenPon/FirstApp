@@ -17,6 +17,7 @@ import com.example.firstapp.presentation.model.Character;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -35,24 +36,30 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Character> filteredList = new ArrayList<>();
-
-                for(Character character: listAll){
-                    if(character.getName().toLowerCase().contains(constraint.toString().toLowerCase())){
+            if (constraint == null || constraint.length() == 0){
+                filteredList.addAll(listAll);
+            }else {
+                for (Character character : listAll) {
+                    if (character.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         listAll.add(character);
                     }
                 }
+            }
             FilterResults filterResults = new FilterResults();
             filterResults.values = filteredList;
             return filterResults;
         }
-   /*     @Override
+        @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            list.clear();
+         //   list.clear();
+            System.out.println(list);
             list.addAll((Collection<? extends Character>) results.values);
+            System.out.println(list);
+
             notifyDataSetChanged();
         }
 
-    */
+
     };
 
     public interface OnItemClickListener {
@@ -95,7 +102,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     public ListAdapter(List<Character> myDataset, OnItemClickListener listener) {
         this.list = myDataset;
         this.listener = listener;
-        this.listAll = new ArrayList<>(list);
+        this.listAll = new ArrayList<>();
+        listAll.addAll(list);
     }
 
     public void setListener(OnItemClickListener listener){
@@ -135,7 +143,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
     @Override
     public int getItemCount() {
-        System.out.println(list.size());
         return list.size();
     }
 
