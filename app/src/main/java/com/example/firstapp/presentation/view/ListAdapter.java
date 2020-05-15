@@ -40,8 +40,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                 filteredList.addAll(listAll);
             }else {
                 for (Character character : listAll) {
-                    if (character.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
-                        listAll.add(character);
+                    if (character.getName().toLowerCase().contains(constraint.toString().toLowerCase().trim())) {
+                        filteredList.add(character);
                     }
                 }
             }
@@ -51,8 +51,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         }
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-         //   list.clear();
+            list.clear();
             System.out.println(list);
+            System.out.println(results);
             list.addAll((Collection<? extends Character>) results.values);
             System.out.println(list);
 
