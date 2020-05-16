@@ -30,5 +30,5 @@ https://rickandmortyapi.com/
 - Affiche la liste des différents personnages
 - Icone de recherche en haut à gauche
 
-<img src="img_readme/Liste_Character.jpg>   <img src='img_readme/Filtered_List_Character.jpg>
+<img src="img_readme/Liste_Character.png>   <img src='img_readme/Filtered_List_Character.png>
 
