@@ -39,4 +39,4 @@ https://rickandmortyapi.com/
 	- Son espèce (Humaine, Alien, etc...)
 	- Son genre (Male, Femelle, etc...)
 
-<img src="img_readme/détail_1.png" alt="liste personnages">   <img src="img_readme/détail_2.png" alt="fonctionnalité recherche">
+<img src="img_readme/détail_1.png" alt="détail perso 1">   <img src="img_readme/détail_2.png" alt="détail perso 2">
