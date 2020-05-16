@@ -28,7 +28,15 @@ https://rickandmortyapi.com/
 
 ### Menu Home
 - Affiche la liste des différents personnages
-- Icone de recherche en haut à gauche
+- Icone de recherche en haut à gauche, pour filtrer la liste.
 
 <img src="img_readme/liste.png" alt="liste personnages">   <img src="img_readme/recherche.png" alt="fonctionnalité recherche">
 
+### Ecran de détail
+- Affiche les caractéristiques du personnage :
+	- Son nom et prénom
+	- Son statut (Mort, En vie, etc...)
+	- Son espèce (Humaine, Alien, etc...)
+	- Son genre (Male, Femelle, etc...)
+
+<img src="img_readme/détail_1.png" alt="liste personnages">   <img src="img_readme/détail_2.png" alt="fonctionnalité recherche">
