@@ -25,6 +25,7 @@
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Description"
+        android:textColor="#CFCACA"
         android:textSize="12sp" />
 
     <TextView
@@ -38,7 +39,8 @@
         android:layout_toRightOf="@id/icon"
         android:gravity="center_vertical"
         android:text="Example application"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:textColor="#CFCACA"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

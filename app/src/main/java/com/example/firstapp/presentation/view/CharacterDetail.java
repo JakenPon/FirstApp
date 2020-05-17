@@ -42,15 +42,15 @@ public class CharacterDetail extends AppCompatActivity {
                 .load(character.getImage())
                 .into(iv);
         status =  findViewById(R.id.Status);
-        status.setText("Status : "+character.getStatus());
+        status.setText("Status : \n"+character.getStatus());
         species = findViewById(R.id.Species);
-        species.setText("Species : "+character.getSpecies());
+        species.setText("Species : \n"+character.getSpecies());
         gender =  findViewById(R.id.Gender);
-        gender.setText("Gender : "+character.getGender());
+        gender.setText("Gender : \n"+character.getGender());
         origin = findViewById(R.id.Origin);
-        origin.setText("Origin : "+character.getOrigin().getName());
+        origin.setText("Origin : \n"+character.getOrigin().getName());
         last_location = findViewById(R.id.Location);
-        last_location.setText("Last location : "+character.getLocation().getName());
+        last_location.setText("Last location : \n"+character.getLocation().getName());
 
     }
 
