@@ -19,6 +19,8 @@ import retrofit2.Response;
 
 public class MainController {
 
+    private int i;
+    private boolean v;
     private SharedPreferences sharedPreferences;
     private Gson gson;
     private MainActivity view;
@@ -31,15 +33,16 @@ public class MainController {
     }
 
     public void OnStart(){
-
+        i = 0;
+        v = true;
         List<Character> characterList = getDataFromCache();
 
 
-        if(characterList != null){
+/*        if(characterList != null){
             view.showList(characterList);
-        } else{
+        } else{ */
             makeApiCall();
-        }
+    //    }
     }
 
     private List<Character> getDataFromCache() {
@@ -54,21 +57,25 @@ public class MainController {
         }
     }
 
-    private void makeApiCall(){
+    private void makeApiCall() {
 
-        Call<RestRickAndMortyResponse> call = Singletons.getRmapi().getRickAndMortyResponse();
+        for(int i=0; i<3;i ++) {
+            System.out.println("info : ");
+        Call<RestRickAndMortyResponse> call = Singletons.getRmapi().getRickAndMortyResponse(getI());
         call.enqueue(new Callback<RestRickAndMortyResponse>() {
             @Override
             public void onResponse(Call<RestRickAndMortyResponse> call, Response<RestRickAndMortyResponse> response) {
-                if(response.isSuccessful() &&  response.body() != null){
-                    System.out.println(response.body());
+                if (response.isSuccessful() && response.body() != null) {
+                  //  System.out.println(response.body().getInfo().getpagesint());
                     List<Character> characterList = response.body().getResults();
-                    for (int i = 0; i < characterList.size(); i++) {
-                        System.out.println(characterList.get(i).getOrigin().getName_planet());
-                    }
                     saveList(characterList);
                     view.showList(characterList);
-                }else {
+                    incrI();
+                    System.out.println("info : "+getI());
+                    if (!((response.body().getInfo().getpagesint()) == getI())){
+                        setV(false);
+                    }
+                } else {
                     view.showError();
                     System.out.println(response.code());
                 }
@@ -79,6 +86,10 @@ public class MainController {
                 view.showError();
             }
         });
+
+      }
+        List<Character> characterList = getDataFromCache();
+        view.showList(characterList);
     }
 
     private void saveList(List<Character> characterList) {
@@ -91,6 +102,28 @@ public class MainController {
 
     public void onItemClick(Character character){
         view.navigateDetails(character);
+    }
+
+
+    public int getI() {
+        return i;
+    }
+
+    public boolean isV() {
+        return v;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public void setV(boolean v) {
+        this.v = v;
+    }
+
+    public int incrI(){
+        i++;
+        return  i;
     }
 
 

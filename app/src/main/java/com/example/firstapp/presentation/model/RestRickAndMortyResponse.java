@@ -7,10 +7,10 @@ import java.util.List;
 public class RestRickAndMortyResponse {
 
 
-    private Object info;
+    private Info info;
     private List<Character> results;
 
-    public Object getInfo() {
+    public Info getInfo() {
         return info;
     }
 

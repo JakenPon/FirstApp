@@ -7,14 +7,6 @@ import java.util.List;
 
 public class Character implements Serializable {
 
-    public class Character_origin implements Serializable{
-        private String name_planet;
-        private String url_planet;
-
-        public String getName_planet() {
-            return name_planet;
-        }
-    }
 
     private Integer id;
     private String name;
@@ -23,7 +15,7 @@ public class Character implements Serializable {
     private String type;
     private String gender;
     private Character_origin origin;
-    private Object location;
+    private Character_location location;
     private String image;
     private List<String> episode;
     private String url;
@@ -60,7 +52,7 @@ public class Character implements Serializable {
         return origin;
     }
 
-    public Object getLocation() { return location; }
+    public Character_location getLocation() { return location; }
 
     public String getImage() {
         return image;

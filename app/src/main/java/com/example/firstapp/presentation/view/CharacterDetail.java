@@ -20,7 +20,7 @@ public class CharacterDetail extends AppCompatActivity {
     private TextView species;
     private TextView gender;
     private TextView origin;
-    private TextView last_loc;
+    private TextView last_location;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -47,6 +47,11 @@ public class CharacterDetail extends AppCompatActivity {
         species.setText("Species : "+character.getSpecies());
         gender =  findViewById(R.id.Gender);
         gender.setText("Gender : "+character.getGender());
+        origin = findViewById(R.id.Origin);
+        origin.setText("Origin : "+character.getOrigin().getName());
+        last_location = findViewById(R.id.Location);
+        last_location.setText("Last location : "+character.getLocation().getName());
+
     }
 
 }
