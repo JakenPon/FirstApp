@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -21,6 +23,7 @@ public class MainController {
 
     private int i;
     private boolean v;
+    private int pageSize;
     private SharedPreferences sharedPreferences;
     private Gson gson;
     private MainActivity view;
@@ -35,14 +38,15 @@ public class MainController {
     public void OnStart(){
         i = 0;
         v = true;
+        pageSize = 1;
         List<Character> characterList = getDataFromCache();
 
 
-/*        if(characterList != null){
+        if(characterList != null){
             view.showList(characterList);
-        } else{ */
+        } else{
             makeApiCall();
-    //    }
+        }
     }
 
     private List<Character> getDataFromCache() {
@@ -58,23 +62,16 @@ public class MainController {
     }
 
     private void makeApiCall() {
-
-        for(int i=0; i<3;i ++) {
-            System.out.println("info : ");
-        Call<RestRickAndMortyResponse> call = Singletons.getRmapi().getRickAndMortyResponse(getI());
+        for(int i = 0; i < 30; i ++) {
+        Call<RestRickAndMortyResponse> call = Singletons.getRmapi().getRickAndMortyResponse(i);
         call.enqueue(new Callback<RestRickAndMortyResponse>() {
             @Override
             public void onResponse(Call<RestRickAndMortyResponse> call, Response<RestRickAndMortyResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                  //  System.out.println(response.body().getInfo().getpagesint());
                     List<Character> characterList = response.body().getResults();
-                    saveList(characterList);
-                    view.showList(characterList);
-                    incrI();
-                    System.out.println("info : "+getI());
-                    if (!((response.body().getInfo().getpagesint()) == getI())){
-                        setV(false);
-                    }
+                    System.out.println(Arrays.toString(characterList.toArray()));
+                    addCharacterToList(characterList);
+                    view.showList(getCharactersFromCache());
                 } else {
                     view.showError();
                     System.out.println(response.code());
@@ -88,8 +85,7 @@ public class MainController {
         });
 
       }
-        List<Character> characterList = getDataFromCache();
-        view.showList(characterList);
+
     }
 
     private void saveList(List<Character> characterList) {
@@ -100,32 +96,26 @@ public class MainController {
                 .apply();
     }
 
+    private void addCharacterToList(List<Character> characterList) {
+        List<Character> characterAlreadyInList = getCharactersFromCache();
+        List<Character> allCharacters = new ArrayList<>();
+        for (int i = 0; i < characterList.size(); i++) allCharacters.add(characterList.get(i));
+        for (int i = 0; i < characterAlreadyInList.size(); i++) allCharacters.add(characterAlreadyInList.get(i));
+        String jsonString = gson.toJson(allCharacters);
+        sharedPreferences
+                .edit()
+                .putString(Constants.KEY_CHARACTER, jsonString)
+                .apply();
+    }
+
+    private List<Character> getCharactersFromCache() {
+        Type listType = new TypeToken<List<Character>>() {}.getType();
+        List<Character> characterList = gson.fromJson(sharedPreferences.getString(Constants.KEY_CHARACTER, ""), listType);
+        if (characterList == null) return new ArrayList<>();
+        else return characterList;
+    }
+
     public void onItemClick(Character character){
         view.navigateDetails(character);
     }
-
-
-    public int getI() {
-        return i;
-    }
-
-    public boolean isV() {
-        return v;
-    }
-
-    public void setI(int i) {
-        this.i = i;
-    }
-
-    public void setV(boolean v) {
-        this.v = v;
-    }
-
-    public int incrI(){
-        i++;
-        return  i;
-    }
-
-
-
 }
