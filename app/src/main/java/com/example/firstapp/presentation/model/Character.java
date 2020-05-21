@@ -66,8 +66,5 @@ public class Character implements Serializable {
         return url;
     }
 
-   /* public String getCreated() {
-        return created;
-    } */
 
 }
