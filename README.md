@@ -41,4 +41,4 @@ https://rickandmortyapi.com/
 	- Sa planète d'origine (Terre, etc...)
 	- Sa dernière localisation connue
 
-<img src="img_readme/Rick.png" alt="détail perso 1">   <img src="img_readme/Rick2.png" alt="détail perso 2">
+<img src="img_readme/Rick.png" alt="détail perso 1">   <img src="img_readme/Rick2.png" alt="détail perso 2">  <img src="img_readme/Rick3.png" alt ="detail perso 3">
