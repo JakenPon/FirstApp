@@ -104,6 +104,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         this.list = myDataset;
         this.listener = listener;
         this.listAll = new ArrayList<>();
+        System.out.print("listAll:"+ listAll);
+        System.out.print("list:"+ list);
         listAll.addAll(list);
     }
 
