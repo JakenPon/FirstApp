@@ -17,7 +17,6 @@ public class CharacterDetail extends AppCompatActivity {
     private TextView tv;
     private ImageView iv;
     private TextView status;
-    private TextView species;
     private TextView gender;
     private TextView origin;
     private TextView last_location;
@@ -42,9 +41,7 @@ public class CharacterDetail extends AppCompatActivity {
                 .load(character.getImage())
                 .into(iv);
         status =  findViewById(R.id.Status);
-        status.setText("Status : \n"+character.getStatus());
-        species = findViewById(R.id.Species);
-        species.setText("Species : \n"+character.getSpecies());
+        status.setText(""+character.getSpecies()+" - "+character.getStatus());
         gender =  findViewById(R.id.Gender);
         gender.setText("Gender : \n"+character.getGender());
         origin = findViewById(R.id.Origin);

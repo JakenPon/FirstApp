@@ -25,7 +25,7 @@
         android:layout_width="407dp"
         android:layout_height="56dp"
         android:gravity="center"
-        android:textColor="#CFCACA"
+        android:textColor="#F1EDED"
         android:textColorHighlight="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -41,40 +41,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="TextView"
-        android:textColor="#CFCACA"
+        android:textColor="#F1EDED"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Name" />
-
-    <TextView
-        android:id="@+id/Species"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        android:textColor="#CFCACA"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Status" />
 
     <TextView
         android:id="@+id/Gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="TextView"
-        android:textColor="#CFCACA"
+        android:textColor="#F1EDED"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Species" />
+        app:layout_constraintTop_toBottomOf="@+id/Status" />
 
     <TextView
         android:id="@+id/Origin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="TextView"
-        android:textColor="#CFCACA"
+        android:textColor="#F1EDED"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Gender" />
@@ -84,8 +75,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="TextView"
-        android:textColor="#CFCACA"
+        android:textColor="#F1EDED"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Origin" />
