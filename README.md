@@ -29,9 +29,9 @@ https://rickandmortyapi.com/
 
 ### Menu Home
 - Affiche la liste des différents personnages
-- Icone de recherche en haut à gauche, pour filtrer la liste.
+- Icone de recherche en haut à droite, pour filtrer la liste.
 
-<img src="img_readme/liste.png" alt="liste personnages">   <img src="img_readme/Recherche_rick.png" alt="fonctionnalité recherche">
+<img src="img_readme/liste.png">   <img src="img_readme/Recherche_rick.png" alt="fonctionnalité recherche">
 
 ### Ecran de détail
 - Affiche les caractéristiques du personnage :
