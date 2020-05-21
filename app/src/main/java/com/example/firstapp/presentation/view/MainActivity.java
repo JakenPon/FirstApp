@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.app.SearchManager;
+
 import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
+
 import android.widget.Toast;
 
 import com.example.firstapp.R;
@@ -22,7 +22,6 @@ import com.example.firstapp.presentation.controller.MainController;
 import com.example.firstapp.presentation.model.Character;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void filter(String toString) {
-
-    }
 
 
     public void showList(List<Character> characterList) {
@@ -61,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        ArrayList<String> strings;
-        //strings = new ArrayList<String>(characterList);
+
 
 
         mAdapter = new ListAdapter(characterList, new ListAdapter.OnItemClickListener() {

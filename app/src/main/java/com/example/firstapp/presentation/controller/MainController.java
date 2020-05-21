@@ -88,13 +88,6 @@ public class MainController {
 
     }
 
-    private void saveList(List<Character> characterList) {
-        String jsonString = gson.toJson(characterList);
-        sharedPreferences
-                .edit()
-                .putString(Constants.KEY_CHARACTER, jsonString)
-                .apply();
-    }
 
     private void addCharacterToList(List<Character> characterList) {
         List<Character> characterAlreadyInList = getCharactersFromCache();

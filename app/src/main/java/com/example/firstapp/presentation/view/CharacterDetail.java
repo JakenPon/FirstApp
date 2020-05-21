@@ -20,6 +20,7 @@ public class CharacterDetail extends AppCompatActivity {
     private TextView gender;
     private TextView origin;
     private TextView last_location;
+    private TextView episode;
 
     @SuppressLint("SetTextI18n")
     @Override
